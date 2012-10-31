@@ -32,10 +32,10 @@ buildrpm() {
     # Download the specified version from the downloads site:
     # e.g. http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip
 
-    cd $DIRECTORY/SOURCES
+    mkdir -p $DIRECTORY/SOURCES
 
     MAJORMINOR=$(echo $VERSION | cut -d. -f1,2)
-    wget -q ${URL}/${MAJORMINOR}/jboss-as-${VERSION}/jboss-as-${VERSION}.zip 
+    wget -q -O $DIRECTORY/SOURCES/jboss-as-${VERSION}.zip ${URL}/${MAJORMINOR}/jboss-as-${VERSION}/jboss-as-${VERSION}.zip 
   fi
 
   rerun rpm:build -n jboss-as -v $VERSION -r $RELEASE -t $DIRECTORY
