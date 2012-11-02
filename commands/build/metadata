@@ -3,3 +3,4 @@
 NAME=build
 DESCRIPTION="Build and package JBoss for installation"
 
+OPTIONS="directory format release url version"
