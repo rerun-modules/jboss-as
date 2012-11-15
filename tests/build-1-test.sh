@@ -20,14 +20,20 @@ describe "build"
 
 it_can_build_the_jboss_example() {
    # build the package:
-   rerun jboss-as:build -v 7.1.1.Final -d $RERUN_MODULES/jboss-as/examples/build/jboss
+
+   buildTmp="$(mktemp -d)"
+
+   cp -r $RERUN_MODULES/jboss-as/examples/build/jboss "${buildTmp}"
+
+   rerun jboss-as:build -v 7.1.1.Final -d "${buildTmp}"/jboss
 
    # check the package:
-   rpm -qi -p $RERUN_MODULES/jboss-as/examples/build/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
-   rpm -qlv -p $RERUN_MODULES/jboss-as/examples/build/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
-   rpm -q --requires -p $RERUN_MODULES/jboss-as/examples/build/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
+   rpm -qi -p "${buildTmp}"/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
+
+   rpm -qlv -p "${buildTmp}"/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
+
+   rpm -q --requires -p "${buildTmp}"/jboss/RPMS/noarch/jboss-as-7.1.1.Final-1.noarch.rpm
 
    # clean up:
-   cd $RERUN_MODULES/jboss-as/examples/build/jboss
-   rm -rf SOURCES/jboss-as-7.1.1.Final.zip BUILD BUILDROOT RPMS
+   rm -rf ${buildTmp}
 }
