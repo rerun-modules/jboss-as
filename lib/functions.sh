@@ -14,4 +14,6 @@
 # Your functions declared here.
 #
 
+JBOSS_VERSION_DEFAULT="7.1.1.Final-1"
+
 
