@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-#/ command: jboss-as:remove: "Remove the JBoss Application Server"
+#/ command: jboss-as:cleanup: "Remove jboss configuration and logs from the system"
 #
-#/ usage: rerun jboss-as:remove [ --cleanup <false>] 
+#/ usage: rerun jboss-as:cleanup [options]
 #
 #/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
-#/ option variables: CLEANUP
+#/ option variables: 
 
 # Read module function library.
 . $RERUN_MODULE_DIR/lib/functions.sh || { 
@@ -17,12 +17,12 @@
 # * Trap calls `rerun_die` with standard message.
 # * Exit upon command errors or accessing unset variables.
 #   * See [set](http://ss64.com/bash/set.html)
-trap 'rerun_die "*** command failed: jboss-as:remove. ***"' ERR
+trap 'rerun_die "*** command failed: jboss-as:cleanup. ***"' ERR
 set -o nounset -o pipefail
 
 # Parse the command options.
-[[ -r $RERUN_MODULE_DIR/commands/remove/options.sh ]] && {
-    . $RERUN_MODULE_DIR/commands/remove/options.sh || rerun_die "Failed loading options parser."
+[[ -r $RERUN_MODULE_DIR/commands/cleanup/options.sh ]] && {
+    . $RERUN_MODULE_DIR/commands/cleanup/options.sh || rerun_die "Failed loading options parser."
     rerun_options_parse "$@"
 }
 
@@ -31,17 +31,7 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-# Stop the jboss-as service
-rerun jboss-as:stop
-
-# Remove jboss-as package and dependencies from the system
-rerun jboss-as:erase
-
-# Cleanup remaining files, if required:
-if [[ $CLEANUP = "true" ]]
-then
-  rerun jboss-as:cleanup
-fi
+sudo rm -rf /var/log/jboss-as
 
 exit $?
 

@@ -14,8 +14,12 @@ describe "remove"
 
 # ------------------------------
 # Replace this test. 
-it_fails_without_a_real_test() {
-    exit 0
+it_runs_without_arguments() {
+    rerun jboss-as: remove
+}
+
+it_runs_with_cleanup() {
+    rerun jboss-as: remove --cleanup true
 }
 # ------------------------------
 

@@ -28,7 +28,12 @@ set -e -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo service jboss-as stop
+if ! chkconfig --list jboss-as > /dev/null 2>&1
+then
+   :
+else
+   sudo service jboss-as stop
+fi
 
 exit $?
 
