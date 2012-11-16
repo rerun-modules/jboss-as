@@ -2,10 +2,10 @@
 #
 #/ command: jboss-as:install: "Install the JBoss Application Server"
 #
-#/ usage: rerun jboss-as:install  --install-url <> 
+#/ usage: rerun jboss-as:install  --jboss-as-package-file <> 
 #
 #/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
-#/ option variables: INSTALL_URL
+#/ option variables: JBOSS_AS_PACKAGE_FILE
 
 # Read module function library.
 . $RERUN_MODULE_DIR/lib/functions.sh || { 
@@ -31,7 +31,7 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo yum -y --nogpgcheck localinstall "${INSTALL_URL}"
+rerun rpm: upgrade --package-file "${JBOSS_AS_PACKAGE_FILE}"
 
 exit $?
 
