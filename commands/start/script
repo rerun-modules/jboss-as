@@ -28,7 +28,8 @@ set -e -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo service jboss-as start
+
+sudo service jboss-as status || sudo service jboss-as start
 
 exit $?
 
