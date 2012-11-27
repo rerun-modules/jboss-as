@@ -32,7 +32,7 @@ set -o nounset -o pipefail
 # ------------------------------
 
 # Remove jboss-as package and its dependencies from the system
-sudo yum --quiet -y remove jboss-as > /dev/null 2>&1
+rerun rpm:erase --package-name jboss-as
 
 exit $?
 
