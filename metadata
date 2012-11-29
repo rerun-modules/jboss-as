@@ -3,6 +3,6 @@
 NAME=jboss-as
 DESCRIPTION="Rerun module to manage working with the JBoss application server"
 INTERPRETER="bash"
-VERSION=1.0
+VERSION=1.0.1
 REQUIRES=rpm
 
